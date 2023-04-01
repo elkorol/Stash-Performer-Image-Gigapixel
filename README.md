@@ -38,7 +38,7 @@ For the plugin to be able to upload upscaled images to Stash, the feature Custom
 ### Example *Add this to config.yml*
 
 ```yaml
-custom_served_folders:<br />
+custom_served_folders:
   /: {Including drive letter, Path to Stash installation}\custom\static
 ```
 
