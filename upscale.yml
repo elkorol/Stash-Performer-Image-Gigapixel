@@ -1,0 +1,25 @@
+name: Upscale Performer images
+description: A.I Upscaling
+version: 0.1
+url: 
+exec:
+ - "/.env/Scripts/python"
+ - "{pluginDir}/upscale.py"
+ - api
+interface: raw
+tasks:
+  - name: Setup tags
+    description: Upscale Standard:0.5x, Upscale Lines:2x, Upscale Art & CG:4x, Upscale Low Resolution:6x, mode:scale
+    defaultArgs:
+      mode: setup
+  - name: Remove tags
+    description: Remove the tags used by plugin
+    defaultArgs:
+      mode: remove_tags
+  - name: Run Upscaler
+    description: Upscale performer images with tags
+    defaultArgs:
+      mode: upscale_all
+
+
+
