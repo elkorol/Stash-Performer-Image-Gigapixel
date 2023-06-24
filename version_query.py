@@ -34,6 +34,11 @@ def get_program_info(program_name):
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path)
         version = winreg.QueryValueEx(key, 'DisplayVersion')[0]
         install_location = winreg.QueryValueEx(key, 'InstallLocation')[0]
-        exe_path = winreg.QueryValueEx(key, 'DisplayIcon')[0]
+        try:
+            exe_path = winreg.QueryValueEx(key, 'DisplayIcon')[0]
+        except OSError:
+            # In my case there was no DisplayIcon key.
+            exe_path = fr'{install_location}\{program_name}.exe'
+            
         winreg.CloseKey(key)
         return version, install_location, exe_path
