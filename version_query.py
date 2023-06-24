@@ -1,4 +1,5 @@
-import winreg
+import winreg, os
+from difflib import get_close_matches
 
 def get_program_info(program_name):
     # Specify the path to the key that contains a list of installed programs
@@ -38,7 +39,10 @@ def get_program_info(program_name):
             exe_path = winreg.QueryValueEx(key, 'DisplayIcon')[0]
         except OSError:
             # In my case there was no DisplayIcon key.
-            exe_path = fr'{install_location}\{program_name}.exe'
+            file_names = os.listdir(install_location)
+            exe_file = get_close_matches(program_name, file_names, 1, 0.5)[0]
+            if exe_file and ".exe" in exe_file:
+                exe_path = os.path.join(install_location, exe_file)
             
         winreg.CloseKey(key)
         return version, install_location, exe_path
