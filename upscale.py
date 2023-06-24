@@ -448,9 +448,6 @@ mutation performerUpdates($input: PerformerUpdateInput!){
     def process_performer_image(self, app, performer, mode, MODE_MAPPING, TAG_NAMES, TAG_MAPPING):
         performer_id = performer[1]  # Initialize performer_id here
         performer_name = performer[2]
-        self.my_log.debug("Performer ID: "+performer_id)
-        self.my_log.debug("Performer Name: "+performer_name)
-        self.my_log.debug("Third: "+performer[2])
         tags = self.findPerformersTagsbyID(performer_id)
         self.check_performer_tagged_once(tags, TAG_NAMES)
         self.check_tags_not_empty(tags)
